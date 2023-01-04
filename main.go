@@ -77,6 +77,8 @@ type User struct {
 	balance   float32
 }
 
+// Products GRUD
+
 func createProduct(products map[string]interface{}, product *Product) error {
 	// insert product into the map
 	products[product.name] = product
@@ -101,5 +103,34 @@ func updateProduct(products map[string]interface{}, product *Product) error {
 func deleteProduct(products map[string]interface{}, name string) error {
 	// delete product from the map
 	delete(products, name)
+	return nil
+}
+
+// User CRUD
+
+func createUser(users map[string]interface{}, user *User) error {
+	// insert user into the map
+	users[user.username] = users
+	return nil
+}
+
+func getUser(users map[string]interface{}, name string) (*User, error) {
+	// retrive user from the map
+	user, ok := users[name]
+	if !ok {
+		return nil, fmt.Errorf("Product not found")
+	}
+	return user.(*User), nil
+}
+
+func updateUser(users map[string]interface{}, user *User) error {
+	// update user in the map
+	users[user.username] = user
+	return nil
+}
+
+func deleteUser(users map[string]interface{}, name string) error {
+	// delete user from the map
+	delete(users, name)
 	return nil
 }
